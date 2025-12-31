@@ -47,13 +47,10 @@ def check_list(my_list, my_word):
 def word_count():
     line = input("Please, input you line \n >").strip().lower()
     list_of_words = line.split()
-    size = len(list_of_words)
-    first = {"text": list_of_words[0], "count": 1}
-    dict_of_words = []
-    dict_of_words.append(first)
-    for i in range(1, size):
-        check_list(dict_of_words, list_of_words[i])
-    print(dict_of_words)
+    result = {}
+    for word in list_of_words:
+        result[word] = result.get(word, 0) + 1
+    print(result)
 
 def add_uniq(my_list, my_word):
     for item in my_list:
@@ -74,23 +71,23 @@ def find_uniq():
 def find_max():
     numbers = get_numbers()
     if numbers is None: return
-    max = numbers[0]
+    max_number = numbers[0]
     for item in numbers:
-        if max < item: max = item
-    print(f"The biggest number is {max}")
+        if max_number < item: max_number = item
+    print(f"The biggest number is {max_number}")
  
 
 def second_max():
     numbers = get_numbers()
-    if numbers == None: return
-    size = len(numbers)
-    for n in range(0,2):
-        for i in range(1, size):
-            if numbers[i]>numbers[n]: 
-                temp = numbers[n]
-                numbers[n] = numbers[i]
-                numbers[i] = temp
-    print (numbers[1])
+    if numbers == None or len(numbers)<2: return
+    max1 = max2 = float("-inf")
+    for n in numbers:
+        if n > max1:
+            max2 = max1
+            max1 = n
+        elif max1 > n > max2:
+            max2 = n
+    print (max2)
 
 
 
